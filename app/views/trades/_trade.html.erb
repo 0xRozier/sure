@@ -10,6 +10,7 @@
                         class: "checkbox checkbox--light hidden lg:block",
                         data: {
                           id: entry.id,
+                          entry_type: entry.entryable_type,
                           "bulk-select-target": "row",
                           action: "bulk-select#toggleRowSelection",
                           checkbox_toggle_target: "selectionEntry"
@@ -31,10 +32,10 @@
             </div>
 
             <div class="truncate flex-shrink">
-              <%= link_to entry.name,
+              <%= link_to(highlight_activity_entry_name(entry.name),
                         entry_path(entry),
                         data: { turbo_frame: "drawer", turbo_prefetch: false },
-                        class: "hover:underline" %>
+                        class: "hover:underline") %>
             </div>
           <% end %>
         </div>
@@ -56,7 +57,7 @@
         <% end %>
         <%= content_tag :p,
                     format_money(-entry.amount_money),
-                    class: ["text-green-600": entry.amount.negative?] %>
+                    class: ["privacy-sensitive", "text-green-600": entry.amount.negative?] %>
       </div>
     </div>
   <% end %>
